@@ -8,23 +8,23 @@ namespace crudApi.Controllers
 {
     [Route("api/[Controller]")]
 
-    public class PollController : Controller
+    public class UsuarioController : Controller
     {
         private readonly IUsuarioRepository _usuarioRepositorio;
 
-        public PollController(IUsuarioRepository _usuarioRepo)
+        public UsuarioController(IUsuarioRepository _usuarioRepo)
         {
             _usuarioRepositorio = _usuarioRepo;
         }
 
         [HttpGet]
-        public IEnumerable<Usuario> getAll(Usuario cpf)
+        public IEnumerable<Usuario> getAll()
         {
             return _usuarioRepositorio.GetAll();
         }
 
         [HttpGet("{cpf}", Name = "GetUser")]
-        public IActionResult GetById(int cpf)
+        public IActionResult GetByCPF(int cpf)
         { ///mudar campo CPF para String
             var usuario = _usuarioRepositorio.Find(cpf);
 
@@ -34,8 +34,7 @@ namespace crudApi.Controllers
             return new ObjectResult(usuario);
 
         }
-
-
+  
         [HttpPost]
         public IActionResult Create([FromBody] Usuario usuario)
         {
@@ -44,7 +43,9 @@ namespace crudApi.Controllers
                 return BadRequest();
            
              _usuarioRepositorio.Add(usuario);
-           return CreatedAtRoute("GetUser", new { cpf = usuario.cpf }, usuario);
+        //    return ("Usuario inse");
+           //return CreatedAtRoute("GetUsuario", new { "dedee"};
+           return CreatedAtRoute("GetUsuario", new { cpf = usuario.cpf }, usuario);
 
         }
 

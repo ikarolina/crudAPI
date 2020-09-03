@@ -4,24 +4,25 @@ using crudApi.Model;
 
 namespace  crudApi.Repository
 {
-    public class UsuariosRepository : IUsuarioRepository
+    public class UsuarioRepository : IUsuarioRepository
     {
         private readonly UsuarioDbContext _contexto;
 
 
-        public UsuariosRepository(UsuarioDbContext ctx)
+        public UsuarioRepository(UsuarioDbContext ctx)
         {   //injeção do contexto do EF
             _contexto = ctx;
         }
 
         public void Add(Usuario cpf)
         {
-            throw new System.NotImplementedException();
+           _contexto.Usuario.Add(cpf);
+            _contexto.SaveChanges();
         }
 
         public Usuario Find(int cpf)
         {
-            throw new System.NotImplementedException();
+             return _contexto.Usuario.FirstOrDefault(u => u.cpf == cpf);
         }
 
         public IEnumerable<Usuario> GetAll()
@@ -36,7 +37,8 @@ namespace  crudApi.Repository
 
         public void Update(Usuario cpf)
         {
-            throw new System.NotImplementedException();
+            _contexto.Usuario.Update(cpf);
+            _contexto.SaveChanges();
         }
     }
 }

@@ -12,9 +12,7 @@ namespace crudApi.Repository
         Usuario Find (int cpf); //localiza uma questão pelo id 
         void Remove (int cpf); // remove as questões
         void Update (Usuario cpf); //atualiza uma questão
-       // void update(Poll views);
-        // void Add (Enquete teste);
-
+       
     }
   
 }
