@@ -49,5 +49,40 @@ namespace crudApi.Controllers
 
         }
 
+        [HttpPut("{cpf}")]
+        public IActionResult Update (int cpf, [FromBody] Usuario Usuario)
+        {
+            
+            if (Usuario == null || Usuario.cpf != cpf)
+           
+            return BadRequest();
+
+            var _usuario = _usuarioRepositorio.Find(cpf);
+
+            if (_usuario == null)
+            return NotFound();
+
+            _usuario.cpf = Usuario.cpf;
+            _usuario.nome = Usuario.nome;
+
+            _usuarioRepositorio.Update(_usuario);
+            return new NoContentResult();
+        }
+
+        [HttpDelete("{cpf}")]
+
+        public IActionResult Delete (int cpf)
+        {
+                    var _usuario = _usuarioRepositorio.Find(cpf);
+
+            if (_usuario == null)
+            return NotFound();
+ 
+            _usuarioRepositorio.Remove(cpf);
+            return new NoContentResult();
+
+
+        }
+
     }
 }

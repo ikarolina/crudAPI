@@ -32,7 +32,9 @@ namespace  crudApi.Repository
 
         public void Remove(int cpf)
         {
-            throw new System.NotImplementedException();
+            var entity = _contexto.Usuario.First(u=> u.cpf == cpf);
+           _contexto.Usuario.Remove(entity);
+           _contexto.SaveChanges();;
         }
 
         public void Update(Usuario cpf)
